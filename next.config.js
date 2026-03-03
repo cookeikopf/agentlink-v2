@@ -4,12 +4,7 @@ const nextConfig = {
     typedRoutes: false,
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'img.clerk.com',
-      },
-    ],
+    remotePatterns: [],
   },
 }
 
