@@ -2,14 +2,14 @@ import { auth } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 import { DashboardShell } from "@/components/layout/dashboard-shell"
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const { userId } = auth()
+  const session = await auth()
   
-  if (!userId) {
+  if (!session.userId) {
     redirect("/sign-in")
   }
   
