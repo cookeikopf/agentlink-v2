@@ -21,7 +21,7 @@ export async function getAgentStats() {
 
     return {
       totalAgents: Number(totalSupply),
-      activeAgents: Number(totalSupply), // All minted agents are considered active
+      activeAgents: Number(totalSupply),
     }
   } catch (error) {
     console.error("Error fetching agent stats:", error)
@@ -38,7 +38,7 @@ export async function getPaymentStats() {
     })
 
     return {
-      totalVolume: Number(formatUnits(stats[0], 6)), // USDC has 6 decimals
+      totalVolume: Number(formatUnits(stats[0], 6)),
       totalFees: Number(formatUnits(stats[1], 6)),
       totalTransactions: Number(stats[2]),
     }
@@ -113,9 +113,9 @@ export async function getFeeBps() {
       functionName: "feeBps",
     })
 
-    return Number(feeBps) / 100 // Convert from basis points to percentage
+    return Number(feeBps) / 100
   } catch (error) {
     console.error("Error fetching fee:", error)
-    return 1.0 // Default 1%
+    return 1.0
   }
 }
