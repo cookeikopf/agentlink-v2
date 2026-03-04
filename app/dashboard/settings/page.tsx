@@ -1,6 +1,5 @@
 "use client"
 
-import { UserProfile } from "@clerk/nextjs"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 
@@ -20,14 +19,7 @@ export default function SettingsPage() {
             <CardTitle>User Profile</CardTitle>
           </CardHeader>
           <CardContent>
-            <UserProfile 
-              appearance={{
-                elements: {
-                  rootBox: "w-full",
-                  card: "shadow-none",
-                }
-              }}
-            />
+            <p className="text-muted-foreground">User profile settings coming soon...</p>
           </CardContent>
         </Card>
 
