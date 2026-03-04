@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
     })
 
     const amountBigInt = parseUnits(amount.toString(), 6) // USDC has 6 decimals
-    const fee = (amountBigInt * feeBps) / 10000n
+    const fee = (amountBigInt * feeBps) / BigInt(10000)
     const receiverAmount = amountBigInt - fee
 
     return NextResponse.json({
@@ -109,7 +109,7 @@ export async function GET(req: NextRequest) {
     let calculation = null
     if (to && amount) {
       const amountBigInt = parseUnits(amount, 6)
-      const fee = (amountBigInt * feeBps) / 10000n
+      const fee = (amountBigInt * feeBps) / BigInt(10000)
       const receiverAmount = amountBigInt - fee
       
       calculation = {
