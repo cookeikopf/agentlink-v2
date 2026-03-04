@@ -57,7 +57,7 @@ export async function getAgentByOwner(ownerAddress: `0x${string}`) {
       args: [ownerAddress],
     })
 
-    if (balance === 0n) {
+    if (balance === BigInt(0)) {
       return null
     }
 
