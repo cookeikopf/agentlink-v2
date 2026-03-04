@@ -1,17 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createPublicClient, http, parseAbiItem } from "viem"
-import { baseSepolia } from "viem/chains"
-import { PaymentRouterABI } from "@/lib/abis"
-
-const PAYMENT_ROUTER_ADDRESS = process.env.NEXT_PUBLIC_PAYMENT_ROUTER_ADDRESS as `0x${string}`
-
-const publicClient = createPublicClient({
-  chain: baseSepolia,
-  transport: http(process.env.NEXT_PUBLIC_RPC_URL || "https://sepolia.base.org"),
-})
-
-// In-memory webhook storage (use Redis/DB in production)
-const webhooks = new Map<string, { url: string; events: string[]; secret: string }>()
+import { webhookStore } from "@/lib/webhook-store"
 
 // POST /api/webhooks/register - Register a webhook
 export async function POST(req: NextRequest) {
@@ -37,10 +25,11 @@ export async function POST(req: NextRequest) {
     }
 
     // Store webhook
-    webhooks.set(agentId, {
+    const webhookSecret = secret || generateSecret()
+    webhookStore.set(agentId, {
       url,
       events,
-      secret: secret || generateSecret(),
+      secret: webhookSecret,
     })
 
     return NextResponse.json({
@@ -48,7 +37,7 @@ export async function POST(req: NextRequest) {
       message: "Webhook registered successfully",
       agentId,
       events,
-      secret: webhooks.get(agentId)?.secret,
+      secret: webhookSecret,
     })
 
   } catch (error) {
@@ -60,7 +49,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// GET /api/webhooks/{agentId} - Get webhook info
+// GET /api/webhooks?agentId=x - Get webhook info
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url)
@@ -73,7 +62,7 @@ export async function GET(req: NextRequest) {
       )
     }
 
-    const webhook = webhooks.get(agentId)
+    const webhook = webhookStore.get(agentId)
     
     if (!webhook) {
       return NextResponse.json(
@@ -98,7 +87,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// DELETE /api/webhooks/{agentId} - Remove webhook
+// DELETE /api/webhooks?agentId=x - Remove webhook
 export async function DELETE(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url)
@@ -111,7 +100,7 @@ export async function DELETE(req: NextRequest) {
       )
     }
 
-    webhooks.delete(agentId)
+    webhookStore.delete(agentId)
 
     return NextResponse.json({
       success: true,
@@ -131,6 +120,3 @@ function generateSecret(): string {
   return "whsec_" + Math.random().toString(36).substring(2, 15) + 
          Math.random().toString(36).substring(2, 15)
 }
-
-// Export for use in other routes
-export { webhooks }

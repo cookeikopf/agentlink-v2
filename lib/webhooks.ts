@@ -1,7 +1,7 @@
 // Webhook dispatcher utility
 // In production, this would use a queue system like Bull/BullMQ
 
-import { webhooks } from "../app/api/webhooks/route"
+import { webhookStore } from "./webhook-store"
 
 export interface WebhookEvent {
   type: string
@@ -10,7 +10,7 @@ export interface WebhookEvent {
 }
 
 export async function dispatchWebhook(agentId: string, event: WebhookEvent) {
-  const webhook = webhooks.get(agentId)
+  const webhook = webhookStore.get(agentId)
   
   if (!webhook) {
     console.log(`No webhook registered for agent ${agentId}`)
