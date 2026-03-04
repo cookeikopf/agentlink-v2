@@ -1,13 +1,14 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
-import { ReactQueryProvider } from "@/components/providers/react-query-provider"
+import { Web3Provider } from "@/components/providers/web3-provider"
+import "@rainbow-me/rainbowkit/styles.css"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "AgentLink Dashboard",
-  description: "Manage your AI agents and transactions",
+  description: "Agent-to-Agent Payment Network on Base",
 }
 
 export default function RootLayout({
@@ -18,9 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ReactQueryProvider>
+        <Web3Provider>
           {children}
-        </ReactQueryProvider>
+        </Web3Provider>
       </body>
     </html>
   )

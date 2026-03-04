@@ -1,7 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { Bell, Search, User } from "lucide-react"
+import { ConnectButton } from "@rainbow-me/rainbowkit"
+import { Bell, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -53,9 +54,7 @@ export function Header() {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Button variant="ghost" size="icon">
-          <User className="h-5 w-5" />
-        </Button>
+        <ConnectButton />
       </div>
     </header>
   )
