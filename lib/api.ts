@@ -495,7 +495,18 @@ class ApiClient {
   }
 
   async getDashboardStats(): Promise<DashboardStats> {
-    return this.fetch('/stats')
+    // Fetch real blockchain stats from API
+    try {
+      const response = await fetch('/api/stats')
+      if (response.ok) {
+        return await response.json()
+      }
+    } catch (error) {
+      console.error('Error fetching blockchain stats:', error)
+    }
+    
+    // Fallback to mock data if API fails
+    return this._generateDashboardStats()
   }
 
   async getRevenueData(): Promise<RevenueData[]> {
