@@ -36,11 +36,11 @@ export default function DashboardPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground">
-          Overview of your agents and transactions
+          Real-time blockchain data from Base Sepolia
         </p>
       </div>
 
-      {/* Stats Cards */}
+      {/* Stats Cards - REAL DATA */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {statsLoading ? (
           <>
@@ -60,11 +60,11 @@ export default function DashboardPage() {
             <StatsCard
               title="Active Agents"
               value={stats.activeAgents}
-              change={5.2}
+              change={0}
               icon={<Users className="h-5 w-5" />}
             />
             <StatsCard
-              title="Total Volume"
+              title="Total Volume (USDC)"
               value={stats.totalVolume}
               change={stats.revenueChange}
               format="currency"
@@ -80,34 +80,50 @@ export default function DashboardPage() {
         ) : null}
       </div>
 
-      {/* Charts */}
+      {/* Charts - Show message if no data */}
       <div className="grid gap-6 lg:grid-cols-3">
         {revenueLoading ? (
           <Skeleton className="col-span-2 h-[400px]" />
-        ) : revenueData ? (
+        ) : revenueData && revenueData.length > 0 ? (
           <RevenueChart data={revenueData} />
-        ) : null}
+        ) : (
+          <div className="col-span-2 flex items-center justify-center h-[400px] bg-muted rounded-lg">
+            <p className="text-muted-foreground">No revenue data available yet</p>
+          </div>
+        )}
         
         {revenueLoading ? (
           <Skeleton className="h-[400px]" />
-        ) : revenueData ? (
+        ) : revenueData && revenueData.length > 0 ? (
           <TransactionVolumeChart data={revenueData} />
-        ) : null}
+        ) : (
+          <div className="flex items-center justify-center h-[400px] bg-muted rounded-lg">
+            <p className="text-muted-foreground">No volume data available yet</p>
+          </div>
+        )}
       </div>
 
       {/* Activity & Top Agents */}
       <div className="grid gap-6 lg:grid-cols-2">
         {activitiesLoading ? (
           <Skeleton className="h-[400px]" />
-        ) : activities ? (
+        ) : activities && activities.length > 0 ? (
           <ActivityFeed activities={activities} />
-        ) : null}
+        ) : (
+          <div className="flex items-center justify-center h-[400px] bg-muted rounded-lg">
+            <p className="text-muted-foreground">No activity yet</p>
+          </div>
+        )}
         
         {agentsLoading ? (
           <Skeleton className="h-[400px]" />
-        ) : agentsData ? (
+        ) : agentsData && agentsData.data.length > 0 ? (
           <TopAgents agents={agentsData.data} />
-        ) : null}
+        ) : (
+          <div className="flex items-center justify-center h-[400px] bg-muted rounded-lg">
+            <p className="text-muted-foreground">No agents registered yet</p>
+          </div>
+        )}
       </div>
     </div>
   )
