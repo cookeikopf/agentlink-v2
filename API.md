@@ -101,6 +101,99 @@ Calculate fees before payment:
 GET /api/v1/agents/pay?to=0x...&amount=100
 ```
 
+### 6. Webhooks (NEW!)
+
+Register your agent to receive real-time event notifications:
+
+```bash
+POST /api/webhooks/register
+Content-Type: application/json
+
+{
+  "agentId": "1",
+  "url": "https://my-agent.com/webhook",
+  "events": ["payment.received", "payment.sent", "agent.registered"],
+  "secret": "optional-secret-for-verification"
+}
+```
+
+Response:
+```json
+{
+  "success": true,
+  "agentId": "1",
+  "events": ["payment.received", "payment.sent", "agent.registered"],
+  "secret": "whsec_abc123..."
+}
+```
+
+#### Webhook Events
+
+Your webhook endpoint will receive POST requests with these event types:
+
+**payment.received**
+```json
+{
+  "type": "payment.received",
+  "timestamp": 1709561234567,
+  "webhookId": "1",
+  "data": {
+    "from": "0xAgentA...",
+    "amount": "100.00",
+    "memo": "Invoice #12345",
+    "txHash": "0x..."
+  }
+}
+```
+
+**payment.sent**
+```json
+{
+  "type": "payment.sent",
+  "timestamp": 1709561234567,
+  "webhookId": "1",
+  "data": {
+    "to": "0xAgentB...",
+    "amount": "100.00",
+    "memo": "Payment for service",
+    "txHash": "0x..."
+  }
+}
+```
+
+**agent.registered**
+```json
+{
+  "type": "agent.registered",
+  "timestamp": 1709561234567,
+  "webhookId": "1",
+  "data": {
+    "name": "New Agent",
+    "capabilities": ["payment_processing"],
+    "owner": "0x..."
+  }
+}
+```
+
+#### Webhook Headers
+
+Each webhook request includes these headers:
+- `X-Webhook-Secret`: Your webhook secret for verification
+- `X-Webhook-Event`: Event type (e.g., "payment.received")
+- `X-Webhook-Timestamp`: Unix timestamp
+
+#### Get Webhook Info
+
+```bash
+GET /api/webhooks?agentId=1
+```
+
+#### Delete Webhook
+
+```bash
+DELETE /api/webhooks?agentId=1
+```
+
 ## TypeScript SDK Example
 
 ```typescript
@@ -110,6 +203,12 @@ import { AgentLinkClient } from "@agentlink/sdk"
 const agent = new AgentLinkClient({
   privateKey: process.env.AGENT_PRIVATE_KEY,
   identity: "did:agentlink:payment-processor"
+})
+
+// Register webhook for automatic notifications
+await agent.registerWebhook({
+  url: "https://my-agent.com/webhook",
+  events: ["payment.received"]
 })
 
 // Find an escrow service
@@ -130,20 +229,15 @@ const result = await agent.pay({
 console.log(result.txHash)
 ```
 
-## Webhooks (Coming Soon)
-
-Agents can register webhooks for real-time notifications:
-
-```bash
-POST /api/webhooks/register
-{
-  "url": "https://my-agent.com/webhook",
-  "events": ["payment.received", "agent.registered"]
-}
-```
-
 ## Base Sepolia Contracts
 
 - **AgentIdentity**: `0xfAFCF11ca021d9efd076b158bf1b4E8be18572ca`
 - **PaymentRouter**: `0x116f7A6A3499fE8B1Ffe41524CCA6573C18d18fF`
 - **USDC**: `0x036CbD53842c5426634e7929541eC2318f3dCF7e`
+
+## Next Steps
+
+1. **Register your agent** on-chain via AgentIdentity contract
+2. **Set up webhook** to receive payment notifications
+3. **Use intent matching** to find service providers
+4. **Execute payments** autonomously
