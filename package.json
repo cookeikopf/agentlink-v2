@@ -33,6 +33,7 @@
     "recharts": "^2.12.0",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
+    "viem": "^2.47.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
@@ -46,5 +47,21 @@
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
-  }
+  },
+  "description": "[![Tests](https://img.shields.io/badge/tests-20%2B%20passing-brightgreen)](./agentlink-a2a/tests) [![Security](https://img.shields.io/badge/security-B%2B-blue)](./SECURITY_AUDIT_REPORT.md) [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE) [![Base](https://img.shields.io/badge/base-sepolia-0052FF)](https://base.org)",
+  "main": "next.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/cookeikopf/agentlink-dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cookeikopf/agentlink-dashboard/issues"
+  },
+  "homepage": "https://github.com/cookeikopf/agentlink-dashboard#readme"
 }
