@@ -1,0 +1,9 @@
+{
+  "name": "agentlink-testnet-deploy",
+  "address": "0x7CbCbFcE82d5d2995b05D59FC05d7fF807004e62",
+  "private_key": "0x7877fb2de397b26cf21df3a6a40eea09f542a3a50d876992479809fdbcb61274",
+  "network": "base-sepolia",
+  "purpose": "Testnet deployment of fixed contracts",
+  "created_at": "2026-03-09T02:28:00Z",
+  "note": "TESTNET ONLY - Unencrypted for deployment automation"
+}

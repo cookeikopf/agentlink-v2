@@ -1,0 +1,48 @@
+# Vercel Environment Variables
+# Kopiere diese in das Vercel Dashboard unter Settings → Environment Variables
+
+# ============================================
+# NETWORK CONFIGURATION
+# ============================================
+NEXT_PUBLIC_NETWORK=base-sepolia
+NEXT_PUBLIC_RPC_URL=https://sepolia.base.org
+
+# ============================================
+# SMART CONTRACT ADDRESSES (NEW - Security Fixed)
+# ============================================
+NEXT_PUBLIC_AGENT_REPUTATION_CONTRACT=0x7C56670BA983546A650e70E8D106631d69a56000
+NEXT_PUBLIC_PAYMENT_ROUTER_CONTRACT=0xf17EDf5B92aAa0b7a3FE7D123906c71f94516D59
+NEXT_PUBLIC_USDC_CONTRACT=0x036CbD53842c5426634e7929541eC2318f3dCF7e
+
+# ============================================
+# PLATFORM CONFIGURATION
+# ============================================
+NEXT_PUBLIC_PLATFORM_NAME=AgentLink
+NEXT_PUBLIC_PLATFORM_FEE_PERCENT=100
+NEXT_PUBLIC_VERSION=1.0.0
+
+# ============================================
+# API CONFIGURATION
+# ============================================
+NEXT_PUBLIC_API_URL=https://agentlink-v2-five.vercel.app/api
+NEXT_PUBLIC_WEBHOOK_URL=https://agentlink-v2-five.vercel.app/api/webhook
+
+# ============================================
+# FEATURE FLAGS
+# ============================================
+NEXT_PUBLIC_ENABLE_MESSAGING=true
+NEXT_PUBLIC_ENABLE_PAYMENTS=true
+NEXT_PUBLIC_ENABLE_REPUTATION=true
+
+# ============================================
+# ANALYTICS (Optional)
+# ============================================
+# NEXT_PUBLIC_ANALYTICS_ID=
+# NEXT_PUBLIC_SENTRY_DSN=
+
+# ============================================
+# SERVER-SIDE ONLY (Add to Environment Variables, not NEXT_PUBLIC_*)
+# ============================================
+# DATABASE_URL=
+# WEBHOOK_SECRET=your-webhook-secret-here
+# API_SECRET_KEY=your-api-secret-here
