@@ -34,7 +34,8 @@ export class X402Parser {
       const decoded = Buffer.from(headerValue, 'base64').toString('utf-8');
       return JSON.parse(decoded);
     } catch (e) {
-      throw new Error(`Invalid X-PAYMENT-REQUIRED header: ${e.message}`);
+      const errorMessage = e instanceof Error ? e.message : 'Unknown error';
+      throw new Error(`Invalid X-PAYMENT-REQUIRED header: ${errorMessage}`);
     }
   }
 
@@ -54,7 +55,8 @@ export class X402Parser {
       const decoded = Buffer.from(headerValue, 'base64').toString('utf-8');
       return JSON.parse(decoded);
     } catch (e) {
-      throw new Error(`Invalid X-PAYMENT-SIGNATURE header: ${e.message}`);
+      const errorMessage = e instanceof Error ? e.message : 'Unknown error';
+      throw new Error(`Invalid X-PAYMENT-SIGNATURE header: ${errorMessage}`);
     }
   }
 
