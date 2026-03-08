@@ -245,50 +245,17 @@ export class AnalyticsDashboard extends EventEmitter {
   generateInsights(): PredictiveInsight[] {
     const newInsights: PredictiveInsight[] = [];
     
-    // 1. Volume Trend Analysis
-    // TODO: Implement analyzeTrend method
-    /*
-    const volumeTrend = this.analyzeTrend('transactions');
-    if (volumeTrend.direction === 'up' && volumeTrend.change > 50) {
-      newInsights.push({
-        id: `insight-${Date.now()}-1`,
-        type: 'trend',
-        category: 'volume',
-        title: 'Transaction Volume Surge',
-        description: `Transaction volume increased by ${volumeTrend.change.toFixed(1)}% in the last 24h.`,
-        confidence: 85,
-        impact: 'high',
-        suggestedAction: 'Consider scaling infrastructure to handle increased load.',
-        data: volumeTrend,
-        createdAt: Date.now()
-      });
-    }
+    // 1. Volume Trend Analysis (DISABLED - TODO: Implement analyzeTrend)
+    // const volumeTrend = this.analyzeTrend('transactions');
+    // if (volumeTrend.direction === 'up' && volumeTrend.change > 50) {
+    //   newInsights.push({...});
+    // }
     
-    // 2. Revenue Anomaly Detection
-    // TODO: Implement detectAnomaly method
-    /*
-    const revenueAnomaly = this.detectAnomaly('revenue');
-    if (revenueAnomaly.detected) {
-      newInsights.push({
-        id: `insight-${Date.now()}-2`,
-        type: 'anomaly',
-        category: 'revenue',
-        title: 'Revenue Anomaly Detected',
-        description: `Revenue is ${revenueAnomaly.deviation > 0 ? 'above' : 'below'} expected by ${Math.abs(revenueAnomaly.deviation).toFixed(1)}%.`,
-        confidence: 90,
-        impact: revenueAnomaly.deviation > 50 ? 'high' : 'medium',
-        suggestedAction: revenueAnomaly.deviation > 0 
-          ? 'Investigate successful campaigns and replicate.'
-          : 'Review pricing strategy and marketing efforts.',
-        data: revenueAnomaly,
-        createdAt: Date.now()
-      });
-    }
-    */
-    */
-        createdAt: Date.now()
-      });
-    }
+    // 2. Revenue Anomaly Detection (DISABLED - TODO: Implement detectAnomaly)
+    // const revenueAnomaly = this.detectAnomaly('revenue');
+    // if (revenueAnomaly.detected) {
+    //   newInsights.push({...});
+    // }
     
     // 3. Top Agent Opportunity
     const topAgent = this.metrics.agents.topPerformers[0];
@@ -307,25 +274,11 @@ export class AnalyticsDashboard extends EventEmitter {
       });
     }
     
-    // 4. API Risk Alert
-    // TODO: Implement assessAPIRisk method
-    /*
-    const apiRisk = this.assessAPIRisk();
-    if (apiRisk.risk === 'high') {
-      newInsights.push({
-        id: `insight-${Date.now()}-4`,
-        type: 'risk',
-        category: 'api',
-        title: 'API Performance Degradation',
-        description: `Average API latency increased to ${this.metrics.api.averageLatency.toFixed(0)}ms.`,
-        confidence: 95,
-        impact: 'high',
-        suggestedAction: 'Investigate API performance and optimize slow endpoints.',
-        data: apiRisk,
-        createdAt: Date.now()
-      });
-    }
-    */
+    // 4. API Risk Alert (DISABLED - TODO: Implement assessAPIRisk)
+    // const apiRisk = this.assessAPIRisk();
+    // if (apiRisk.risk === 'high') {
+    //   newInsights.push({...});
+    // }
     
     this.insights = [...newInsights, ...this.insights].slice(0, 50); // Keep last 50
     
