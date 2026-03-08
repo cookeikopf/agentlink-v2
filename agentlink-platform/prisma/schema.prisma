@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -27,16 +27,16 @@ model AgentWallet {
 }
 
 model SessionKey {
-  id          String    @id @default(cuid())
+  id          String    @id @default(uuid())
   walletId    String
   address     String
   validUntil  DateTime
-  spendLimit  BigInt
-  spent       BigInt    @default(0)
+  spendLimit  Int
+  spent       Int       @default(0)
   createdAt   DateTime  @default(now())
   
   // JSON field for permissions
-  permissions Json
+  permissions String
   
   // Relations
   wallet      AgentWallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
