@@ -114,7 +114,7 @@ export class AnalyticsDashboard extends EventEmitter {
     enterprise: { price: 50000000n, features: ['all', 'api', 'custom'] } // 50 USDC/mo
   };
   
-  private subscribers: Map<`0x${string}`, { tier: keyof typeof SUBSCRIPTION_TIERS; expiresAt: number }> = new Map();
+  private subscribers: Map<`0x${string}`, { tier: 'basic' | 'pro' | 'enterprise'; expiresAt: number }> = new Map();
   
   constructor() {
     super();
