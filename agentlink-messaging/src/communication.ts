@@ -400,11 +400,11 @@ export class A2ARouter extends EventEmitter {
   async broadcast(message: A2AMessage): Promise<void> {
     const promises: Promise<void>[] = [];
     
-    for (const [address, channel] of this.channels) {
+    Array.from(this.channels).forEach(([address, channel]) => {
       if (channel.isConnected()) {
         promises.push(channel.send(message));
       }
-    }
+    });
     
     await Promise.all(promises);
   }
@@ -420,9 +420,9 @@ export class A2ARouter extends EventEmitter {
    * Trennt alle Verbindungen
    */
   disconnectAll(): void {
-    for (const channel of this.channels.values()) {
+    Array.from(this.channels.values()).forEach(channel => {
       channel.disconnect();
-    }
+    });
     this.channels.clear();
   }
   
