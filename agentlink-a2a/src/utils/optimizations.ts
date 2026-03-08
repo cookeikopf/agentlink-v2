@@ -41,7 +41,7 @@ export class BlockchainCache {
   }
   
   invalidatePattern(pattern: RegExp): void {
-    for (const key of this.cache.keys()) {
+    for (const key of [...this.cache.keys()]) {
       if (pattern.test(key)) {
         this.cache.delete(key);
       }
