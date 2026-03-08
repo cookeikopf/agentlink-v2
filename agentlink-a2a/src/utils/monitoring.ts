@@ -181,7 +181,8 @@ export class AgentLinkMonitor {
       };
       
     } catch (error) {
-      issues.push(`Health-Check Fehler: ${error.message}`);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      issues.push(`Health-Check Fehler: ${errorMessage}`);
       return {
         healthy: false,
         issues,
