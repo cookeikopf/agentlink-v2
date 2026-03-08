@@ -246,6 +246,8 @@ export class AnalyticsDashboard extends EventEmitter {
     const newInsights: PredictiveInsight[] = [];
     
     // 1. Volume Trend Analysis
+    // TODO: Implement analyzeTrend method
+    /*
     const volumeTrend = this.analyzeTrend('transactions');
     if (volumeTrend.direction === 'up' && volumeTrend.change > 50) {
       newInsights.push({
@@ -263,6 +265,8 @@ export class AnalyticsDashboard extends EventEmitter {
     }
     
     // 2. Revenue Anomaly Detection
+    // TODO: Implement detectAnomaly method
+    /*
     const revenueAnomaly = this.detectAnomaly('revenue');
     if (revenueAnomaly.detected) {
       newInsights.push({
@@ -277,6 +281,11 @@ export class AnalyticsDashboard extends EventEmitter {
           ? 'Investigate successful campaigns and replicate.'
           : 'Review pricing strategy and marketing efforts.',
         data: revenueAnomaly,
+        createdAt: Date.now()
+      });
+    }
+    */
+    */
         createdAt: Date.now()
       });
     }
@@ -299,6 +308,8 @@ export class AnalyticsDashboard extends EventEmitter {
     }
     
     // 4. API Risk Alert
+    // TODO: Implement assessAPIRisk method
+    /*
     const apiRisk = this.assessAPIRisk();
     if (apiRisk.risk === 'high') {
       newInsights.push({
@@ -314,6 +325,7 @@ export class AnalyticsDashboard extends EventEmitter {
         createdAt: Date.now()
       });
     }
+    */
     
     this.insights = [...newInsights, ...this.insights].slice(0, 50); // Keep last 50
     
