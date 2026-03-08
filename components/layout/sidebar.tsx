@@ -4,17 +4,20 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { 
   LayoutDashboard, 
-  Users, 
   Receipt, 
   Settings,
-  Bot
+  Bot,
+  Store,
+  Globe
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { name: "Agents", href: "/dashboard/agents", icon: Bot },
-  { name: "Transactions", href: "/dashboard/transactions", icon: Receipt },
+  { name: "My Agents", href: "/dashboard/agents", icon: Bot },
+  { name: "My Transactions", href: "/dashboard/transactions", icon: Receipt },
+  { name: "Marketplace", href: "/dashboard/marketplace", icon: Store },
+  { name: "Explorer", href: "/dashboard/explorer", icon: Globe },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ]
 
