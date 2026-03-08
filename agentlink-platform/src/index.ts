@@ -14,6 +14,17 @@ export { ReputationSystem, ReputationProfile, TransactionRecord, Review } from '
 export { AnalyticsDashboard, PlatformMetrics, PredictiveInsight } from './analytics.js';
 export { AgentLinkSDK, SDKConfig, Task, Workflow as SDKWorkflow } from './sdk.js';
 
+// A2A Messaging
+export {
+  A2AMessagingService,
+  MessageType,
+  MessageStatus,
+  A2AMessage,
+  DeliveryReceipt,
+  WebhookConfig,
+  RegisteredAgent,
+} from './messaging.js';
+
 // Constants & ABIs
 export {
   NETWORKS as CONTRACT_NETWORKS,
