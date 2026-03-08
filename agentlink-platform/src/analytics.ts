@@ -313,7 +313,7 @@ export class AnalyticsDashboard extends EventEmitter {
   /**
    * Erkennt Anomalien
    */
-  private detectAnomaly(metric: string): { detected: boolean; deviation: number }> {
+  private detectAnomaly(metric: string): { detected: boolean; deviation: number } {
     const data = this.historicalData.get(metric) || [];
     if (data.length < 7) return { detected: false, deviation: 0 };
     
@@ -335,7 +335,7 @@ export class AnalyticsDashboard extends EventEmitter {
   /**
    * Beurteilt API Risk
    */
-  private assessAPIRisk(): { risk: 'low' | 'medium' | 'high' }> {
+  private assessAPIRisk(): { risk: 'low' | 'medium' | 'high' } {
     const avgLatency = this.metrics.api.averageLatency;
     
     if (avgLatency < 100) return { risk: 'low' };
@@ -364,7 +364,7 @@ export class AnalyticsDashboard extends EventEmitter {
   subscribe(
     address: `0x${string}`,
     tier: keyof typeof this.SUBSCRIPTION_TIERS
-  ): { success: boolean; invoice: SubscriptionInvoice }> {
+  ): { success: boolean; invoice: SubscriptionInvoice } {
     const config = this.SUBSCRIPTION_TIERS[tier];
     
     const invoice: SubscriptionInvoice = {
@@ -392,7 +392,7 @@ export class AnalyticsDashboard extends EventEmitter {
   checkAccess(
     address: `0x${string}`,
     feature: string
-  ): { allowed: boolean; tier?: string }> {
+  ): { allowed: boolean; tier?: string } {
     const subscription = this.subscribers.get(address);
     
     if (!subscription || Date.now() > subscription.expiresAt) {
