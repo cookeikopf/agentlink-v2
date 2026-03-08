@@ -205,7 +205,8 @@ export class AnalyticsDashboard extends EventEmitter {
     this.metrics.transactions.successRate = (successful / total) * 100;
     
     // Store historical data
-    this.addDataPoint('transactions', Date.now(), Number(amount));
+    // TODO: Implement addDataPoint method
+    // this.addDataPoint('transactions', Date.now(), Number(amount));
     
     this.emit('transactionTracked', amount, success);
   }
