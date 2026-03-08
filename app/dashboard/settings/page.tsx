@@ -2,10 +2,26 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { useAccount } from "wagmi"
+import { useState, useEffect } from "react"
 
 export default function SettingsPage() {
-  const { address } = useAccount()
+  const [address, setAddress] = useState<string>("Not connected")
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+    // Try to get address from localStorage or window.ethereum
+    if (typeof window !== 'undefined') {
+      const savedAddress = localStorage.getItem('walletAddress')
+      if (savedAddress) {
+        setAddress(savedAddress)
+      }
+    }
+  }, [])
+
+  if (!isClient) {
+    return null
+  }
 
   return (
     <div className="space-y-6">
@@ -25,13 +41,17 @@ export default function SettingsPage() {
             <div className="space-y-4">
               <div>
                 <p className="text-sm text-muted-foreground">Connected Address</p>
-                <code className="mt-1 block rounded bg-muted px-3 py-2 text-sm font-mono">
-                  {address || "Not connected"}
+                <code className="mt-1 block rounded bg-muted px-3 py-2 text-sm font-mono break-all">
+                  {address}
                 </code>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Network</p>
                 <p className="font-medium">Base Sepolia (Testnet)</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Status</p>
+                <p className="font-medium text-green-600">Active</p>
               </div>
             </div>
           </CardContent>
@@ -116,6 +136,32 @@ export default function SettingsPage() {
                     Save
                   </button>
                 </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Smart Contracts</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <p className="font-medium">AgentReputation</p>
+                <code className="mt-1 block rounded bg-muted px-3 py-2 text-xs font-mono break-all">
+                  0x7C56670BA983546A650e70E8D106631d69a56000
+                </code>
+              </div>
+              <div>
+                <p className="font-medium">PaymentRouter</p>
+                <code className="mt-1 block rounded bg-muted px-3 py-2 text-xs font-mono break-all">
+                  0xf17EDf5B92aAa0b7a3FE7D123906c71f94516D59
+                </code>
+              </div>
+              <div>
+                <p className="font-medium">USDC (Sepolia)</p>
+                <code className="mt-1 block rounded bg-muted px-3 py-2 text-xs font-mono break-all">
+                  0x036CbD53842c5426634e7929541eC2318f3dCF7e
+                </code>
               </div>
             </CardContent>
           </Card>
