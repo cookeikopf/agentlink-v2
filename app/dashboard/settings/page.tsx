@@ -1,10 +1,12 @@
 "use client"
 
-import { UserProfile } from "@clerk/nextjs"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { useAccount } from "wagmi"
 
 export default function SettingsPage() {
+  const { address } = useAccount()
+
   return (
     <div className="space-y-6">
       <div>
@@ -17,17 +19,21 @@ export default function SettingsPage() {
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>User Profile</CardTitle>
+            <CardTitle>Wallet Profile</CardTitle>
           </CardHeader>
           <CardContent>
-            <UserProfile 
-              appearance={{
-                elements: {
-                  rootBox: "w-full",
-                  card: "shadow-none",
-                }
-              }}
-            />
+            <div className="space-y-4">
+              <div>
+                <p className="text-sm text-muted-foreground">Connected Address</p>
+                <code className="mt-1 block rounded bg-muted px-3 py-2 text-sm font-mono">
+                  {address || "Not connected"}
+                </code>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Network</p>
+                <p className="font-medium">Base Sepolia (Testnet)</p>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
