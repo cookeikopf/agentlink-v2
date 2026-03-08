@@ -290,7 +290,7 @@ export class AnalyticsDashboard extends EventEmitter {
   /**
    * Analysiert Trend
    */
-  private analyzeTrend(metric: string): { direction: 'up' | 'down' | 'stable'; change: number }> {
+  private analyzeTrend(metric: string): { direction: 'up' | 'down' | 'stable'; change: number } {
     const data = this.historicalData.get(metric) || [];
     if (data.length < 2) return { direction: 'stable', change: 0 };
     
