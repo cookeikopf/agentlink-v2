@@ -375,11 +375,12 @@ export class ConversationStateMachine {
   }
   
   isTerminal(): boolean {
-    return [
+    const terminalStates = [
       ConversationState.COMPLETED,
       ConversationState.REJECTED,
       ConversationState.RESOLVED
-    ].includes(this.state);
+    ];
+    return terminalStates.includes(this.state as ConversationState);
   }
 }
 
