@@ -169,8 +169,7 @@ export class A2AIntentMatcher {
             capabilities: metadata.capabilities.split(',').map(c => c.trim()),
             endpoint: metadata.endpoint,
             reputation,
-            availability: metadata.active ? 'available' : 'offline',
-            x402Compatible: true  // Alle unsere Agenten sind x402 kompatibel
+            availability: metadata.active ? 'available' : 'offline'
           });
         } catch (e) {
           // Skip invalid agents
