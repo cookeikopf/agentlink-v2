@@ -42,7 +42,6 @@ export interface AgentMatch {
   matchedCapabilities: string[];
   estimatedPrice: string;
   estimatedTime: string;
-  x402Compatible: boolean;
 }
 
 // Contract Adressen
@@ -221,8 +220,7 @@ export class A2AIntentMatcher {
       confidence: Math.min(confidence, 1.0),
       matchedCapabilities,
       estimatedPrice,
-      estimatedTime: 'Unknown',  // Könnte aus historischen Daten kommen
-      x402Compatible: agent.x402Compatible
+      estimatedTime: 'Unknown'  // Könnte aus historischen Daten kommen
     };
   }
 
