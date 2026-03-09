@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createPublicClient, http, parseAbiItem, formatUnits } from "viem"
+import { createPublicClient, http } from "viem"
 import { baseSepolia } from "viem/chains"
-import { AgentIdentityABI, PaymentRouterABI } from "@/lib/abis"
+import { AgentIdentityABI } from "@/lib/abis"
+
+export const dynamic = "force-dynamic"
 
 const AGENT_IDENTITY_ADDRESS = process.env.NEXT_PUBLIC_AGENT_IDENTITY_ADDRESS as `0x${string}`
-const PAYMENT_ROUTER_ADDRESS = process.env.NEXT_PUBLIC_PAYMENT_ROUTER_ADDRESS as `0x${string}`
 
 const publicClient = createPublicClient({
   chain: baseSepolia,

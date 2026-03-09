@@ -4,6 +4,7 @@ import { privateKeyToAccount } from "viem/accounts"
 import { baseSepolia } from "viem/chains"
 import { PaymentRouterABI, USDCABI } from "@/lib/abis"
 import { notifyPaymentReceived, notifyPaymentSent } from "@/lib/webhooks"
+import { reputationStore } from "@/lib/reputation-store"
 
 const PAYMENT_ROUTER_ADDRESS = process.env.NEXT_PUBLIC_PAYMENT_ROUTER_ADDRESS as `0x${string}`
 const USDC_ADDRESS = process.env.NEXT_PUBLIC_USDC_ADDRESS as `0x${string}`
@@ -122,6 +123,7 @@ export async function POST(req: NextRequest) {
     })
 
     if (!txHash) {
+      reputationStore.recordPayment(from, to, false)
       return NextResponse.json({
         status: "error",
         message: "Transaction failed",
@@ -133,6 +135,7 @@ export async function POST(req: NextRequest) {
     const receipt = await publicClient.waitForTransactionReceipt({ hash: txHash })
 
     if (receipt.status !== "success") {
+      reputationStore.recordPayment(from, to, false)
       return NextResponse.json({
         status: "failed",
         message: "Transaction reverted",
@@ -140,6 +143,8 @@ export async function POST(req: NextRequest) {
         receipt,
       }, { status: 500 })
     }
+
+    reputationStore.recordPayment(from, to, true)
 
     // Send webhooks to notify agents
     notifyPaymentSent(from, {

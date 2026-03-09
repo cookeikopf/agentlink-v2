@@ -7,6 +7,8 @@ import { RevenueChart } from "@/components/dashboard/revenue-chart"
 import { TransactionVolumeChart } from "@/components/dashboard/transaction-volume-chart"
 import { ActivityFeed } from "@/components/dashboard/activity-feed"
 import { TopAgents } from "@/components/dashboard/top-agents"
+import { CoordinationPanel } from "@/components/dashboard/coordination-panel"
+import { ReputationPanel } from "@/components/dashboard/reputation-panel"
 import { Skeleton } from "@/components/ui/skeleton"
 import { api } from "@/lib/api"
 
@@ -101,6 +103,12 @@ export default function DashboardPage() {
             <p className="text-muted-foreground">No volume data available yet</p>
           </div>
         )}
+      </div>
+
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <CoordinationPanel />
+        <ReputationPanel agents={agentsData?.data || []} />
       </div>
 
       {/* Activity & Top Agents */}
