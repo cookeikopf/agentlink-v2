@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server"
 import { getAgentStats, getPaymentStats } from "@/lib/blockchain"
 
+export const dynamic = "force-dynamic"
+
 export async function GET() {
   try {
     const [agentStats, paymentStats] = await Promise.all([

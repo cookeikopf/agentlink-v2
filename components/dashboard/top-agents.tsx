@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link"
-import { TrendingUp, Users } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
@@ -73,10 +72,7 @@ export function TopAgents({ agents }: TopAgentsProps) {
                 <p className="text-sm font-medium">
                   {formatCurrency(agent.totalRevenue)}
                 </p>
-                <div className="flex items-center justify-end gap-1 text-xs text-green-500">
-                  <TrendingUp className="h-3 w-3" />
-                  <span>+{(Math.random() * 20 + 5).toFixed(1)}%</span>
-                </div>
+                <p className="text-xs text-muted-foreground">{formatNumber(agent.totalTransactions)} txs</p>
               </div>
             </Link>
           ))}

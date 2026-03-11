@@ -86,3 +86,27 @@ export interface ApiError {
   code: string;
   status: number;
 }
+
+
+export interface AgentMessage {
+  id: string;
+  threadId: string;
+  from: string;
+  to: string;
+  kind: 'proposal' | 'counter' | 'accept' | 'reject' | 'info';
+  content: string;
+  createdAt: number;
+}
+
+export interface ReputationProfile {
+  agentId: string;
+  score: number;
+  paymentsSent: number;
+  paymentsReceived: number;
+  successfulPayments: number;
+  failedPayments: number;
+  messagesSent: number;
+  messagesReceived: number;
+  negotiationWins: number;
+  updatedAt: number;
+}
