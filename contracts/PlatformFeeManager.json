@@ -1,0 +1,18 @@
+{
+  "abi": [
+    { "inputs": [{ "internalType": "address", "name": "_usdc", "type": "address" }], "stateMutability": "nonpayable", "type": "constructor" },
+    { "inputs": [], "name": "FeeCollected", "type": "event", "anonymous": false, "indexed": true, "inputs": [{ "indexed": true, "internalType": "address", "name": "sender", "type": "address" }, { "indexed": true, "internalType": "address", "name": "receiver", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "feeAmount", "type": "uint256" } ] },
+    { "inputs": [], "name": "SubscriptionPurchased", "type": "event", "anonymous": false, "indexed": true, "inputs": [ { "indexed": true, "internalType": "address", "name": "agent", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "tier", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "expiry", "type": "uint256" } ] },
+    { "inputs": [], "name": "FeesWithdrawn", "type": "event", "anonymous": false, "indexed": true, "inputs": [ { "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256" } ] },
+    { "inputs": [{ "internalType": "address", "name": "_receiver", "type": "address" }, { "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "internalType": "bytes32", "name": "_txHash", "type": "bytes32" }], "name": "processPayment", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" },
+    { "inputs": [{ "internalType": "uint256", "name": "_tier", "type": "uint256" }], "name": "purchaseSubscription", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
+    { "inputs": [{ "internalType": "address", "name": "_agent", "type": "address" }], "name": "isSubscriptionActive", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" },
+    { "inputs": [{ "internalType": "address", "name": "_agent", "type": "address" }], "name": "getSubscriptionTier", "outputs": [ { "internalType": "uint256", "name": "tier", "type": "uint256" }, { "internalType": "uint256", "name": "expiry", "type": "uint256" }, { "internalType": "uint256", "name": "totalPaid", "type": "uint256" } ], "stateMutability": "view", "type": "function" },
+    { "inputs": [{ "internalType": "uint256", "name": "_mount", "type": "uint256" }], "name": "calculateFee", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" },
+    { "inputs": [], "name": "getPlatformStats", "outputs": [
+      { "internalType": "uint256", "name": "totalFeesCollected", "type": "uint256" },
+      { "internalType": "uint256", "name": "totalTransactions", "type": "uint256" },
+      { "internalType": "uint256", "name": "contractBalance", "type": "uint256" }
+    ], "stateMutability": "view", "type": "function" }
+  ]
+}
